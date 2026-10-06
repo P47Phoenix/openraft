@@ -24,7 +24,9 @@ where C: RaftTypeConfig
 
     /// Enable or disable raft internal ticker.
     ///
-    /// Disabling tick will disable election and heartbeat.
+    /// Disabling tick will disable election and heartbeat. While disabled, the internal ticker
+    /// parks and causes no wakeups; re-enabling it resumes ticking, with the first tick one tick
+    /// interval later.
     pub fn tick(&self, enabled: bool) {
         self.raft_inner.tick_handle.enable(enabled);
     }
